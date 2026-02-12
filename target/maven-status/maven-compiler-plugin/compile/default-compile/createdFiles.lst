@@ -1,10 +1,15 @@
 com/camunda/simulator/service/ProcessEngine.class
+com/camunda/simulator/service/InputValidator.class
 com/camunda/simulator/model/TestScenario.class
+com/camunda/simulator/service/BpmnValidationRunner$BpmnValidationResult.class
 com/camunda/simulator/SimulatorApplication.class
+com/camunda/simulator/service/BpmnValidationRunner$ScenarioResult.class
 com/camunda/simulator/model/SimulationResult.class
 com/camunda/simulator/service/DMNEvaluator.class
 com/camunda/simulator/service/BpmnInputAnalyzer.class
 com/camunda/simulator/http/MultipartParser$ParsedFile.class
+com/camunda/simulator/service/BpmnValidationRunner$InputValidationCase.class
+com/camunda/simulator/service/BpmnValidationRunner.class
 com/camunda/simulator/service/FileManager.class
 com/camunda/simulator/http/StaticFileHandler.class
 com/camunda/simulator/model/InputField.class

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.camunda.simulator.InputValidatorTest" time="0.005" tests="11" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/farhankemal/Documents/GitHub/camunda-automation-testing/target/test-classes:/Users/farhankemal/Documents/GitHub/camunda-automation-testing/target/classes:/Users/farhankemal/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.2/jackson-databind-2.15.2.jar:/Users/farhankemal/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.2/jackson-annotations-2.15.2.jar:/Users/farhankemal/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.2/jackson-core-2.15.2.jar:/Users/farhankemal/.m2/repository/org/camunda/bpm/model/camunda-bpmn-model/7.20.0/camunda-bpmn-model-7.20.0.jar:/Users/farhankemal/.m2/repository/org/camunda/bpm/model/camunda-xml-model/7.20.0/camunda-xml-model-7.20.0.jar:/Users/farhankemal/.m2/repository/org/camunda/bpm/dmn/camunda-engine-dmn/7.20.0/camunda-engine-dmn-7.20.0.jar:/Users/farhankemal/.m2/repository/org/camunda/commons/camunda-commons-utils/1.13.0/camunda-commons-utils-1.13.0.jar:/Users/farhankemal/.m2/repository/org/camunda/commons/camunda-commons-logging/1.13.0/camunda-commons-logging-1.13.0.jar:/Users/farhankemal/.m2/repository/org/camunda/commons/camunda-commons-typed-values/7.20.0/camunda-commons-typed-values-7.20.0.jar:/Users/farhankemal/.m2/repository/org/slf4j/slf4j-api/1.7.26/slf4j-api-1.7.26.jar:/Users/farhankemal/.m2/repository/org/camunda/bpm/model/camunda-dmn-model/7.20.0/camunda-dmn-model-7.20.0.jar:/Users/farhankemal/.m2/repository/org/camunda/bpm/dmn/camunda-engine-feel-api/7.20.0/camunda-engine-feel-api-7.20.0.jar:/Users/farhankemal/.m2/repository/org/camunda/bpm/dmn/camunda-engine-feel-juel/7.20.0/camunda-engine-feel-juel-7.20.0.jar:/Users/farhankemal/.m2/repository/org/camunda/bpm/dmn/camunda-engine-feel-scala/7.20.0/camunda-engine-feel-scala-7.20.0.jar:/Users/farhankemal/.m2/repository/org/camunda/feel/feel-engine/1.16.2/feel-engine-1.16.2-scala-shaded.jar:/Users/farhankemal/.m2/repository/org/scala-lang/scala-library/2.13.10/scala-library-2.13.10.jar:/Users/farhankemal/.m2/repository/com/lihaoyi/fastparse_2.13/2.3.3/fastparse_2.13-2.3.3.jar:/Users/farhankemal/.m2/repository/com/lihaoyi/sourcecode_2.13/0.2.3/sourcecode_2.13-0.2.3.jar:/Users/farhankemal/.m2/repository/com/lihaoyi/geny_2.13/0.6.10/geny_2.13-0.6.10.jar:/Users/farhankemal/.m2/repository/org/camunda/bpm/juel/camunda-juel/7.20.0/camunda-juel-7.20.0.jar:/Users/farhankemal/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.0/junit-jupiter-5.10.0.jar:/Users/farhankemal/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.0/junit-jupiter-api-5.10.0.jar:/Users/farhankemal/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/farhankemal/.m2/repository/org/junit/platform/junit-platform-commons/1.10.0/junit-platform-commons-1.10.0.jar:/Users/farhankemal/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/farhankemal/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.0/junit-jupiter-params-5.10.0.jar:/Users/farhankemal/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.0/junit-jupiter-engine-5.10.0.jar:/Users/farhankemal/.m2/repository/org/junit/platform/junit-platform-engine/1.10.0/junit-platform-engine-1.10.0.jar:"/>
+    <property name="java.vm.vendor" value="Eclipse Adoptium"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="user.timezone" value="Asia/Makassar"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="ID"/>
+    <property name="sun.boot.library.path" value="/Users/farhankemal/.sdkman/candidates/java/17.0.12-tem/lib"/>
+    <property name="sun.java.command" value="/Users/farhankemal/Documents/GitHub/camunda-automation-testing/target/surefire/surefirebooter-20260212150748331_3.jar /Users/farhankemal/Documents/GitHub/camunda-automation-testing/target/surefire 2026-02-12T15-07-48_296-jvmRun1 surefire-20260212150748331_1tmp surefire_0-20260212150748331_2tmp"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/Users/farhankemal/Documents/GitHub/camunda-automation-testing/target/test-classes:/Users/farhankemal/Documents/GitHub/camunda-automation-testing/target/classes:/Users/farhankemal/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.2/jackson-databind-2.15.2.jar:/Users/farhankemal/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.2/jackson-annotations-2.15.2.jar:/Users/farhankemal/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.2/jackson-core-2.15.2.jar:/Users/farhankemal/.m2/repository/org/camunda/bpm/model/camunda-bpmn-model/7.20.0/camunda-bpmn-model-7.20.0.jar:/Users/farhankemal/.m2/repository/org/camunda/bpm/model/camunda-xml-model/7.20.0/camunda-xml-model-7.20.0.jar:/Users/farhankemal/.m2/repository/org/camunda/bpm/dmn/camunda-engine-dmn/7.20.0/camunda-engine-dmn-7.20.0.jar:/Users/farhankemal/.m2/repository/org/camunda/commons/camunda-commons-utils/1.13.0/camunda-commons-utils-1.13.0.jar:/Users/farhankemal/.m2/repository/org/camunda/commons/camunda-commons-logging/1.13.0/camunda-commons-logging-1.13.0.jar:/Users/farhankemal/.m2/repository/org/camunda/commons/camunda-commons-typed-values/7.20.0/camunda-commons-typed-values-7.20.0.jar:/Users/farhankemal/.m2/repository/org/slf4j/slf4j-api/1.7.26/slf4j-api-1.7.26.jar:/Users/farhankemal/.m2/repository/org/camunda/bpm/model/camunda-dmn-model/7.20.0/camunda-dmn-model-7.20.0.jar:/Users/farhankemal/.m2/repository/org/camunda/bpm/dmn/camunda-engine-feel-api/7.20.0/camunda-engine-feel-api-7.20.0.jar:/Users/farhankemal/.m2/repository/org/camunda/bpm/dmn/camunda-engine-feel-juel/7.20.0/camunda-engine-feel-juel-7.20.0.jar:/Users/farhankemal/.m2/repository/org/camunda/bpm/dmn/camunda-engine-feel-scala/7.20.0/camunda-engine-feel-scala-7.20.0.jar:/Users/farhankemal/.m2/repository/org/camunda/feel/feel-engine/1.16.2/feel-engine-1.16.2-scala-shaded.jar:/Users/farhankemal/.m2/repository/org/scala-lang/scala-library/2.13.10/scala-library-2.13.10.jar:/Users/farhankemal/.m2/repository/com/lihaoyi/fastparse_2.13/2.3.3/fastparse_2.13-2.3.3.jar:/Users/farhankemal/.m2/repository/com/lihaoyi/sourcecode_2.13/0.2.3/sourcecode_2.13-0.2.3.jar:/Users/farhankemal/.m2/repository/com/lihaoyi/geny_2.13/0.6.10/geny_2.13-0.6.10.jar:/Users/farhankemal/.m2/repository/org/camunda/bpm/juel/camunda-juel/7.20.0/camunda-juel-7.20.0.jar:/Users/farhankemal/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.0/junit-jupiter-5.10.0.jar:/Users/farhankemal/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.0/junit-jupiter-api-5.10.0.jar:/Users/farhankemal/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/farhankemal/.m2/repository/org/junit/platform/junit-platform-commons/1.10.0/junit-platform-commons-1.10.0.jar:/Users/farhankemal/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/farhankemal/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.0/junit-jupiter-params-5.10.0.jar:/Users/farhankemal/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.0/junit-jupiter-engine-5.10.0.jar:/Users/farhankemal/.m2/repository/org/junit/platform/junit-platform-engine/1.10.0/junit-platform-engine-1.10.0.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/farhankemal"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2024-07-16"/>
+    <property name="java.home" value="/Users/farhankemal/.sdkman/candidates/java/17.0.12-tem"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/Users/farhankemal/Documents/GitHub/camunda-automation-testing"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="/Users/farhankemal/Documents/GitHub/camunda-automation-testing/target/surefire/surefirebooter-20260212150748331_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.runtime.version" value="17.0.12+7"/>
+    <property name="user.name" value="farhankemal"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="15.2"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Temurin-17.0.12+7"/>
+    <property name="localRepository" value="/Users/farhankemal/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="/var/folders/5h/88q8b7fd29gcts78vf2b9l6h0000gn/T/"/>
+    <property name="java.version" value="17.0.12"/>
+    <property name="user.dir" value="/Users/farhankemal/Documents/GitHub/camunda-automation-testing"/>
+    <property name="os.arch" value="aarch64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/farhankemal/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Eclipse Adoptium"/>
+    <property name="java.vm.version" value="17.0.12+7"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="invalidJsonIsRejected" classname="com.camunda.simulator.InputValidatorTest" time="0.0"/>
+  <testcase name="validInputReturnsNoErrors" classname="com.camunda.simulator.InputValidatorTest" time="0.001"/>
+  <testcase name="validateAndGetFirstErrorReturnsNullForValid" classname="com.camunda.simulator.InputValidatorTest" time="0.0"/>
+  <testcase name="dealMarginPercentAsStringIsRejected" classname="com.camunda.simulator.InputValidatorTest" time="0.001"/>
+  <testcase name="missingManualPriceCostIsRejected" classname="com.camunda.simulator.InputValidatorTest" time="0.0"/>
+  <testcase name="missingDealMarginPercentIsRejected" classname="com.camunda.simulator.InputValidatorTest" time="0.001"/>
+  <testcase name="emptyBodyIsRejected" classname="com.camunda.simulator.InputValidatorTest" time="0.0"/>
+  <testcase name="dealMarginPercentAsBooleanIsRejected" classname="com.camunda.simulator.InputValidatorTest" time="0.001"/>
+  <testcase name="manualPriceCostAsStringIsRejected" classname="com.camunda.simulator.InputValidatorTest" time="0.0"/>
+  <testcase name="manualPriceCostAsNumberIsRejected" classname="com.camunda.simulator.InputValidatorTest" time="0.0"/>
+  <testcase name="validateAndGetFirstErrorReturnsMessageForInvalid" classname="com.camunda.simulator.InputValidatorTest" time="0.0"/>
+</testsuite>

@@ -109,47 +109,6 @@
             transform: translateY(0);
         }
         
-        .scenarios {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .scenario-card {
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .scenario-card:hover {
-            border-color: #667eea;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .scenario-card h3 {
-            color: #667eea;
-            margin-bottom: 8px;
-        }
-        
-        .scenario-card p {
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 10px;
-        }
-        
-        .scenario-card .params {
-            font-family: monospace;
-            font-size: 0.85em;
-            color: #333;
-            background: #f5f5f5;
-            padding: 8px;
-            border-radius: 4px;
-        }
-        
         .result {
             margin-top: 30px;
             padding: 20px;
@@ -215,6 +174,88 @@
             font-weight: bold;
         }
         
+        .validation-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .validation-result-banner {
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 1.4em;
+            font-weight: 700;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .validation-result-banner.valid {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+        }
+        
+        .validation-result-banner.invalid {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+        }
+        
+        .test-cases-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .test-cases-table th,
+        .test-cases-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .test-cases-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .test-cases-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .test-cases-table tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        
+        .badge.pass {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .badge.fail {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .badge.pending {
+            background: #e9ecef;
+            color: #6c757d;
+        }
+        
         .loading {
             display: none;
             text-align: center;
@@ -244,7 +285,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎯 Camunda Design-Time Process Simulator</h1>
+            <h1>Camunda Design-Time Process Simulator</h1>
+            <p>CSG Hackathon Bali February 2026 - Group 20</p>
             <p>Validate Entry Level Camunda Exercise workflows before deployment</p>
         </div>
         
@@ -271,10 +313,19 @@
                 </div>
             </div>
             
-            <div class="section">
-                <h2>Test Scenarios</h2>
-                <p style="margin-bottom: 15px; color: #666;">Click on a scenario to run it, or create your own custom test below.</p>
-                <div class="scenarios" id="scenarios"></div>
+            <div class="section validation-section">
+                <h2>Automation Test Cases &amp; Validation</h2>
+                <p style="margin-bottom: 15px; color: #666;">Run all automation test scenarios and compare actual results with expectations. The BPMN is valid only when all tests pass.</p>
+                <div id="automationTestCasesTable"></div>
+                <button type="button" class="btn" id="runAllTestsBtn" onclick="runValidation()" style="margin-top: 15px;">Run all automation tests</button>
+                <div id="validationLoading" class="loading" style="margin-top: 15px;">
+                    <div class="spinner"></div>
+                    <p style="margin-top: 10px;">Running all test scenarios...</p>
+                </div>
+                <div id="validationResult" style="display: none; margin-top: 20px;">
+                    <div id="validationResultBanner" class="validation-result-banner"></div>
+                    <div id="validationResultDetails"></div>
+                </div>
             </div>
             
             <div class="section">
@@ -411,30 +462,121 @@
             }
         }
         
-        // Load scenarios on page load
+        // Load scenarios on page load (business + input validation)
         async function loadScenarios() {
             try {
-                const response = await fetch(`${API_BASE}/scenarios`);
-                const scenarios = await response.json();
-                const container = document.getElementById('scenarios');
+                const [scenariosRes, validationRes] = await Promise.all([
+                    fetch(`${API_BASE}/scenarios`),
+                    fetch(`${API_BASE}/scenarios/validation`)
+                ]);
+                const scenarios = await scenariosRes.json();
+                const validationScenarios = await validationRes.json();
                 
-                scenarios.forEach((scenario, index) => {
-                    const card = document.createElement('div');
-                    card.className = 'scenario-card';
-                    card.onclick = () => runScenario(scenario);
-                    card.innerHTML = `
-                        <h3>${scenario.name}</h3>
-                        <p>${scenario.description}</p>
-                        <div class="params">
-                            manualPriceCost: ${scenario.inputs.manualPriceCost}<br>
-                            dealMarginPercent: ${scenario.inputs.dealMarginPercent}
-                        </div>
-                    `;
-                    container.appendChild(card);
-                });
+                // Combined list for automation table: business first, then input validation (order matches POST /api/validate)
+                const allRows = [
+                    ...scenarios.map(s => ({ type: 'business', name: s.name, description: s.description, inputs: s.inputs, expectedResult: s.expectedResult })),
+                    ...validationScenarios.map(s => ({ type: 'validation', name: s.name, description: s.description, invalidJson: s.invalidJson, expectedResult: 'Rejected' }))
+                ];
+                
+                const tableContainer = document.getElementById('automationTestCasesTable');
+                tableContainer.innerHTML = `
+                    <table class="test-cases-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Test Case</th>
+                                <th>Description</th>
+                                <th>Inputs / Payload</th>
+                                <th>Expected</th>
+                                <th>Result</th>
+                            </tr>
+                        </thead>
+                        <tbody id="automationTestCasesBody">
+                            ${allRows.map((row, i) => `
+                                <tr>
+                                    <td>${i + 1}</td>
+                                    <td>${row.name}</td>
+                                    <td>${row.description}</td>
+                                    <td><code>${row.type === 'business' 
+                                        ? `manualPriceCost: ${row.inputs.manualPriceCost}, dealMarginPercent: ${row.inputs.dealMarginPercent}` 
+                                        : row.invalidJson.replace(/</g, '&lt;').substring(0, 60) + (row.invalidJson.length > 60 ? '...' : '')}</code></td>
+                                    <td><strong>${row.expectedResult}</strong></td>
+                                    <td><span class="badge pending">Not run</span></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
             } catch (error) {
                 console.error('Failed to load scenarios:', error);
             }
+        }
+        
+        // Run all automation tests (BPMN validation)
+        async function runValidation() {
+            const loading = document.getElementById('validationLoading');
+            const resultDiv = document.getElementById('validationResult');
+            const runBtn = document.getElementById('runAllTestsBtn');
+            
+            loading.classList.add('show');
+            resultDiv.style.display = 'none';
+            runBtn.disabled = true;
+            
+            try {
+                const response = await fetch(`${API_BASE}/validate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                const data = await response.json();
+                displayValidationResult(data);
+                resultDiv.style.display = 'block';
+            } catch (error) {
+                console.error('Validation failed:', error);
+                document.getElementById('validationResultBanner').textContent = 'Validation failed: ' + (error.message || 'Could not reach server');
+                document.getElementById('validationResultBanner').className = 'validation-result-banner invalid';
+                document.getElementById('validationResult').style.display = 'block';
+            } finally {
+                loading.classList.remove('show');
+                runBtn.disabled = false;
+            }
+        }
+        
+        // Display validation result in UI
+        function displayValidationResult(data) {
+            const banner = document.getElementById('validationResultBanner');
+            const details = document.getElementById('validationResultDetails');
+            
+            banner.textContent = data.validationMessage || (data.allPassed ? 'BPMN is valid' : 'BPMN is invalid');
+            banner.className = 'validation-result-banner ' + (data.allPassed ? 'valid' : 'invalid');
+            
+            // Update result column in table (status + execution path when present)
+            const rows = document.querySelectorAll('#automationTestCasesBody tr');
+            (data.scenarioResults || []).forEach((sr, i) => {
+                if (rows[i]) {
+                    const badgeCell = rows[i].querySelector('td:last-child');
+                    if (badgeCell) {
+                        const esc = (s) => (s == null ? '' : String(s).replace(/</g, '&lt;').replace(/>/g, '&gt;'));
+                        let html = `<span class="badge ${sr.passed ? 'pass' : 'fail'}">${sr.passed ? 'PASS' : 'FAIL'}</span> actual: ${esc(sr.actual)}`;
+                        if (sr.pathPassed != null) {
+                            html += `<br><small>Path: <span class="badge ${sr.pathPassed ? 'pass' : 'fail'}">${sr.pathPassed ? 'PASS' : 'FAIL'}</span></small>`;
+                            if (sr.actualPath) {
+                                html += `<br><small style="display:block; margin-top:4px; color:#555;" title="Expected: ${esc(sr.expectedPath || '')}">${esc(sr.actualPath)}</small>`;
+                            }
+                        }
+                        badgeCell.innerHTML = html;
+                    }
+                }
+            });
+            
+            // Summary details
+            const passedCount = (data.scenarioResults || []).filter(s => s.passed).length;
+            const total = (data.scenarioResults || []).length;
+            details.innerHTML = `
+                <p style="margin-top: 10px; color: #666;">
+                    <strong>Summary:</strong> ${passedCount} of ${total} test scenarios passed (status and execution path checked where applicable).
+                </p>
+            `;
         }
         
         // Run a scenario

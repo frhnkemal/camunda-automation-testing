@@ -5,7 +5,9 @@ import com.camunda.simulator.model.SimulationInput;
 import com.camunda.simulator.model.SimulationResult;
 import com.camunda.simulator.model.TestScenario;
 import com.camunda.simulator.service.BpmnInputAnalyzer;
+import com.camunda.simulator.service.BpmnValidationRunner;
 import com.camunda.simulator.service.DMNEvaluator;
+import com.camunda.simulator.service.InputValidator;
 import com.camunda.simulator.service.FileManager;
 import com.camunda.simulator.service.ProcessEngine;
 import org.camunda.bpm.model.bpmn.Bpmn;
@@ -65,6 +67,8 @@ public class SimulatorHttpHandler implements HttpHandler {
                 handleSimulate(exchange);
             } else if (path.equals("/api/scenarios") && "GET".equals(method)) {
                 handleGetScenarios(exchange);
+            } else if (path.equals("/api/scenarios/validation") && "GET".equals(method)) {
+                handleGetValidationScenarios(exchange);
             } else if (path.startsWith("/api/scenarios/") && path.endsWith("/run") && "POST".equals(method)) {
                 handleRunScenario(exchange, path);
             } else if (path.equals("/api/upload/bpmn") && "POST".equals(method)) {
@@ -75,6 +79,8 @@ public class SimulatorHttpHandler implements HttpHandler {
                 handleGetFiles(exchange);
             } else if (path.equals("/api/inputs") && "GET".equals(method)) {
                 handleGetInputs(exchange);
+            } else if (path.equals("/api/validate") && "POST".equals(method)) {
+                handleValidate(exchange);
             } else {
                 sendError(exchange, 404, "Not Found");
             }
@@ -98,14 +104,16 @@ public class SimulatorHttpHandler implements HttpHandler {
         InputStream requestBody = exchange.getRequestBody();
         String body = new String(requestBody.readAllBytes(), StandardCharsets.UTF_8);
         
-        // Parse JSON input
-        SimulationInput input = objectMapper.readValue(body, SimulationInput.class);
-        
-        // Validate input
-        if (input.getManualPriceCost() == null || input.getDealMarginPercent() == null) {
-            sendError(exchange, 400, "Invalid input: manualPriceCost and dealMarginPercent are required");
+        // Validate types: dealMarginPercent must be number, manualPriceCost must be boolean
+        List<String> validationErrors = InputValidator.validate(body);
+        if (!validationErrors.isEmpty()) {
+            String message = String.join("; ", validationErrors);
+            sendError(exchange, 400, "Invalid input: " + message);
             return;
         }
+        
+        // Parse JSON input (types already validated)
+        SimulationInput input = objectMapper.readValue(body, SimulationInput.class);
         
         // Execute simulation
         SimulationResult result = processEngine.execute(input);
@@ -115,78 +123,46 @@ public class SimulatorHttpHandler implements HttpHandler {
     }
     
     private void handleGetScenarios(HttpExchange exchange) throws IOException {
-        List<TestScenario> scenarios = Arrays.asList(
-            new TestScenario(
-                "Manual Pricing - Invalid",
-                "Manual pricing always results in Invalid status",
-                new SimulationInput(true, 30.0),
-                "Invalid"
-            ),
-            new TestScenario(
-                "Low Margin - Invalid",
-                "Margin below 25% results in Invalid status",
-                new SimulationInput(false, 24.0),
-                "Invalid"
-            ),
-            new TestScenario(
-                "Valid Scenario",
-                "Margin >= 25% and no manual pricing results in Valid status",
-                new SimulationInput(false, 25.0),
-                "Valid"
-            ),
-            new TestScenario(
-                "High Margin - Valid",
-                "High margin with no manual pricing results in Valid status",
-                new SimulationInput(false, 30.0),
-                "Valid"
-            )
-        );
-        
-        sendJsonResponse(exchange, 200, scenarios);
+        sendJsonResponse(exchange, 200, BpmnValidationRunner.getTestScenarios());
+    }
+
+    private void handleGetValidationScenarios(HttpExchange exchange) throws IOException {
+        sendJsonResponse(exchange, 200, BpmnValidationRunner.getInputValidationScenarios());
     }
     
     private void handleRunScenario(HttpExchange exchange, String path) throws IOException {
-        // Extract scenario name from path: /api/scenarios/{name}/run
+        // Extract scenario slug from path: /api/scenarios/{slug}/run
         String[] parts = path.split("/");
         if (parts.length < 4) {
             sendError(exchange, 400, "Invalid scenario path");
             return;
         }
         
-        String scenarioName = parts[3];
-        Map<String, TestScenario> scenarioMap = new HashMap<>();
-        scenarioMap.put("manual-pricing-invalid", new TestScenario(
-            "Manual Pricing - Invalid",
-            "Manual pricing always results in Invalid status",
-            new SimulationInput(true, 30.0),
-            "Invalid"
-        ));
-        scenarioMap.put("low-margin-invalid", new TestScenario(
-            "Low Margin - Invalid",
-            "Margin below 25% results in Invalid status",
-            new SimulationInput(false, 24.0),
-            "Invalid"
-        ));
-        scenarioMap.put("valid-scenario", new TestScenario(
-            "Valid Scenario",
-            "Margin >= 25% and no manual pricing results in Valid status",
-            new SimulationInput(false, 25.0),
-            "Valid"
-        ));
-        scenarioMap.put("high-margin-valid", new TestScenario(
-            "High Margin - Valid",
-            "High margin with no manual pricing results in Valid status",
-            new SimulationInput(false, 30.0),
-            "Valid"
-        ));
+        String requestedSlug = parts[3];
+        Map<String, TestScenario> scenarioBySlug = new HashMap<>();
+        for (TestScenario s : BpmnValidationRunner.getTestScenarios()) {
+            String slug = toSlug(s.getName());
+            scenarioBySlug.put(slug, s);
+        }
         
-        TestScenario scenario = scenarioMap.get(scenarioName);
+        TestScenario scenario = scenarioBySlug.get(requestedSlug);
         if (scenario == null) {
-            sendError(exchange, 404, "Scenario not found: " + scenarioName);
+            sendError(exchange, 404, "Scenario not found: " + requestedSlug);
             return;
         }
         
         SimulationResult result = processEngine.execute(scenario.getInputs());
+        sendJsonResponse(exchange, 200, result);
+    }
+    
+    private static String toSlug(String name) {
+        if (name == null) return "";
+        return name.toLowerCase().replaceAll("[^a-z0-9]+", "-").replaceAll("^-|-$", "");
+    }
+    
+    private void handleValidate(HttpExchange exchange) throws IOException {
+        BpmnValidationRunner runner = new BpmnValidationRunner(processEngine);
+        BpmnValidationRunner.BpmnValidationResult result = runner.runAll();
         sendJsonResponse(exchange, 200, result);
     }
     

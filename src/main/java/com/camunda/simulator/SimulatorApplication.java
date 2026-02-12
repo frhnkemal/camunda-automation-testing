@@ -35,7 +35,7 @@ public class SimulatorApplication {
             server.start();
             
             System.out.println("=".repeat(60));
-            System.out.println("🎯 Camunda Design-Time Process Simulator");
+            System.out.println("Camunda Design-Time Process Simulator");
             System.out.println("=".repeat(60));
             System.out.println("Server started on http://localhost:" + PORT);
             System.out.println("API endpoints available at http://localhost:" + PORT + CONTEXT_PATH);
