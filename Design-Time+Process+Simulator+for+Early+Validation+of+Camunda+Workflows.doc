@@ -1,0 +1,604 @@
+Date: Tue, 10 Feb 2026 02:07:04 +0000 (UTC)
+Message-ID: <679584887.13.1770689224714@db2b9caca832>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_12_450201438.1770689224713"
+
+------=_Part_12_450201438.1770689224713
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>Design-Time Process Simulator for Early Validation of Camunda Wo=
+rkflows</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        table {
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+
+        table td, table th {
+            border: solid 1px;
+            padding: 5px;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font: var(--ds-font-body-small, Arial, Helvetica, FreeSans, sans-se=
+rif);
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: var(--ds-surface, #fff) !important;
+        color: var(--ds-text, #000) !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: var(--ds-text, #000);
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        page-break-after: avoid;
+    }
+
+    pre {
+        font: var(--ds-font-code, Monaco, "Courier New", monospace);
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    /* CONF-28544 cannot print multiple pages in IE */
+    #splitter-content {
+        position: relative !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>Design-Time Process Simulator for Early Validation of Camunda Workf=
+lows</h1>
+    <div class=3D"Section1">
+        <h2 local-id=3D"4beb9bc4b328" id=3D"Design-TimeProcessSimulatorforE=
+arlyValidationofCamundaWorkflows-ChallengeTitle"><strong>Challenge Title</s=
+trong></h2>
+<p local-id=3D"11c8f8dc6f41"><strong>=E2=80=9CCamunda Design=E2=80=91Time P=
+rocess Simulator (Entry=E2=80=91Level MVP)=E2=80=9D</strong></p>
+<hr local-id=3D"1b1e2f01-49a5-4182-bad0-553d292f6d0c">
+<h2 local-id=3D"13315a7ec996" id=3D"Design-TimeProcessSimulatorforEarlyVali=
+dationofCamundaWorkflows-DescribeYourIdea"><strong>Describe Your Idea</stro=
+ng></h2>
+<p local-id=3D"03dfadfcfbea">Today, we can only validate Camunda workflows =
+<strong>after</strong> they are deployed and wired into the <strong>Telflow=
+ training/test environment</strong> (enquiry, delivery process, job workers=
+, Vault config, etc.). This means:</p>
+<ul local-id=3D"e7301e84-6cf1-4ada-bea8-6a0fb05b4219">
+<li local-id=3D"0b1addb3-cb10-4f78-9be6-fd25514423b3">
+<p local-id=3D"f0fcfa713b44">We discover <strong>BPMN/DMN defects late</str=
+ong> (wrong variables, gateway conditions, DMN logic).</p></li>
+<li local-id=3D"6db59f10-d879-470c-b4c9-a3fe7f253873">
+<p local-id=3D"ce8971a42a52">Testing <strong>all paths at runtime</strong> =
+is heavy, slow, and often incomplete.</p></li>
+<li local-id=3D"c5b3989c-f294-4570-b497-01f52801dafe">
+<p local-id=3D"9b5fae16d1df"><strong>Business Analysts (BAs)</strong> who d=
+esign processes can=E2=80=99t easily validate their models until everything=
+ is integrated.</p></li>
+</ul>
+<p local-id=3D"a25bd3c19639">Using the <strong>Entry Level =E2=80=93 Camund=
+a Exercise</strong> as a reference process, this challenge will deliver a <=
+strong>small but working MVP</strong> of a <strong>Camunda Design=E2=80=91T=
+ime Process Simulator</strong> that runs <strong>before deployment</strong>=
+, without needing the training environment.</p>
+<h3 local-id=3D"af32c0ff6364" id=3D"Design-TimeProcessSimulatorforEarlyVali=
+dationofCamundaWorkflows-ScopeoftheMVP(WhatWeWillActuallyBuildinaWeek)"><st=
+rong>Scope of the MVP (What We Will Actually Build in a Week)</strong></h3>
+<p local-id=3D"a3e222e89c9b">For the specific <em>Entry Level =E2=80=93 Cam=
+unda Exercise</em> process:</p>
+<ul local-id=3D"556bc520-d5c9-4b6c-9a75-7ec1e86927e8">
+<li local-id=3D"c249656a-87ea-4349-92eb-bf78401d5f22">
+<p local-id=3D"24d76fe74ce7"><strong>Inputs</strong> (mirroring the enquiry=
+ fields):</p>
+<ul local-id=3D"06fcde73-a521-432a-a1f9-44deb02df2ca">
+<li local-id=3D"f409f46b-8988-4fd4-8a41-e45a75f51c0e">
+<p local-id=3D"6944f580bd26"><code>manualPriceCost</code> flag (manual pric=
+ing/costing).</p></li>
+<li local-id=3D"1bbde0da-14ee-4bce-b804-7ca0f4f3212c">
+<p local-id=3D"bd39f2966ab8"><code>dealMarginPercent</code> (margin percent=
+age).</p></li>
+</ul></li>
+<li local-id=3D"efa5fd5b-e4c1-48e9-923a-0d6d72f20ef1">
+<p local-id=3D"fc08d5af46d9"><strong>Process + Decision to Simulate</strong=
+><br>
+Based on the exercise page:</p>
+<ul local-id=3D"22ad5ea1-3cc6-421b-ada3-5c85ba6b1e14">
+<li local-id=3D"0cac8263-f12c-4cf3-853b-9de24eab9faa">
+<p local-id=3D"bad3a267823e">BPMN containing:</p>
+<ul local-id=3D"4a5a6f74-1fe9-4d12-a5d3-402520f73d55">
+<li local-id=3D"ea52f1d9-923c-4149-8abf-4616726d19e4">
+<p local-id=3D"a27e875dc6d2"><code>Prepare Values for DMN</code> (service t=
+ask using <code>data-manipulation</code> headers to map <code>bi_dealMargin=
+Percent</code> and <code>bi_manualPriceCost</code> into process variables).=
+</p></li>
+<li local-id=3D"9a214497-7fae-407d-be47-dc76876c4ab3">
+<p local-id=3D"e894469eb743"><code>Look-up Results</code> (DMN decision cal=
+l with Decision ID <code>entry_level_camunda_exercise_v1_0</code> writing t=
+o <code>quoteValidity</code>).</p></li>
+<li local-id=3D"45619add-87cd-46cb-acf1-19dafdb2df64">
+<p local-id=3D"295ebcf83b6a"><code>Result / Decision Gateway</code> with:</=
+p>
+<ul local-id=3D"a74796af-0571-4de0-9df9-6daa1134d6cc">
+<li local-id=3D"c16c9f7e-cd17-47e9-9bb3-483d80419e31">
+<p local-id=3D"af2ad3b97ce5"><strong>Default flow</strong> =E2=86=92 <code>=
+Set Status Valid</code> (sets <code>cim_Status =3D "Valid"</code>).</p></li=
+>
+<li local-id=3D"190950b1-5fab-44ae-bfe0-6f9a6264e0be">
+<p local-id=3D"a8bd885eaf96">Conditional flow <code>quoteValidity =3D "Inva=
+lid"</code> =E2=86=92 <code>Set Status Invalid</code> (sets <code>cim_Statu=
+s =3D "Invalid"</code>).</p></li>
+</ul></li>
+</ul></li>
+<li local-id=3D"6c827e2b-f934-4552-bef8-6a331ed5d649">
+<p local-id=3D"9658004c9d3e">DMN attached on the page:</p>
+<ul local-id=3D"2ae08db9-c89d-49b7-9095-e1b9f73bb41b">
+<li local-id=3D"e2f691f5-467d-48f0-8e53-ccede701db0e">
+<p local-id=3D"b6d93699cf79">If <strong>margin &lt; 25% OR manualPriceCost =
+=3D true</strong> =E2=86=92 <code>quoteValidity =3D "Invalid"</code>.</p></=
+li>
+<li local-id=3D"a7517edb-a023-41f1-824c-5efcb1f22b78">
+<p local-id=3D"05e005459fbf">Otherwise =E2=86=92 <code>quoteValidity =3D "V=
+alid"</code>.</p></li>
+</ul></li>
+</ul></li>
+</ul>
+<p local-id=3D"ac1ffcf8ccfc"><strong>The MVP simulator will:</strong></p>
+<ol start=3D"1" local-id=3D"6ffce647-8174-4937-a713-01252b429e1d">
+<li local-id=3D"c27eb376-c7bc-4032-9f5a-1bf366afba26">
+<p local-id=3D"cc16cfbf3d5f"><strong>Run the process at design time (no env=
+ironment needed)</strong></p>
+<ul local-id=3D"0fe74432-5089-40d1-b8b6-6729ef6498a4">
+<li local-id=3D"061557d8-0e96-450b-af29-02f216d95522">
+<p local-id=3D"3b2513f23d40">Load the Entry=E2=80=91Level BPMN and DMN file=
+s (from disk or a simple config).</p></li>
+<li local-id=3D"3fdb1634-8906-4aa2-b58f-9db615866310">
+<p local-id=3D"e1340f8496f0">Accept inputs for:</p>
+<ul local-id=3D"97205293-049d-4541-9020-4f47d2e02fb7">
+<li local-id=3D"6c95f197-4df9-4032-8762-a2e2c36ff94b">
+<p local-id=3D"f69b4976d3c5"><code>manualPriceCost</code> (true/false).</p>=
+</li>
+<li local-id=3D"15ee99c3-6f1b-401d-a30c-8bb1b53aa32d">
+<p local-id=3D"4edd40d2cce8"><code>dealMarginPercent</code> (number).</p></=
+li>
+</ul></li>
+<li local-id=3D"efb4f91d-fc29-4139-88bc-cc50bd8a0632">
+<p local-id=3D"6512455f2090">Execute:</p>
+<ul local-id=3D"611e17d0-39ba-49d8-9221-1cb4960aa498">
+<li local-id=3D"db94c4e2-8ffe-4542-8780-6f5a4c24a0ab">
+<p local-id=3D"826ecfbc7dbc">=E2=80=9CMocked=E2=80=9D <code>Prepare Values =
+for DMN</code> (no real job worker, just variable mapping).</p></li>
+<li local-id=3D"20967317-1a34-4b36-b4cd-687408ae0c06">
+<p local-id=3D"71c2b233f388">The internal DMN decision <code>entry_level_ca=
+munda_exercise_v1_0</code>.</p></li>
+<li local-id=3D"49297418-cf87-470a-87e0-3b6b26ecdc38">
+<p local-id=3D"c44e98dfb363">The <code>Result / Decision Gateway</code> log=
+ic based on <code>quoteValidity</code>.</p></li>
+</ul></li>
+</ul></li>
+<li local-id=3D"36bd9bb4-f2d3-4cb7-95ea-3575ad4a18fd">
+<p local-id=3D"c35009424080"><strong>Show the path taken and outcome</stron=
+g></p>
+<ul local-id=3D"ffb5b862-d36a-4d13-aa65-432e93c29c6f">
+<li local-id=3D"81208d26-4fc8-47ba-ae6e-a1dd810bbe3f">
+<p local-id=3D"067ec795bfc2">Display:</p>
+<ul local-id=3D"cd85924f-f2ff-4f5c-9873-f062f7ad6cdb">
+<li local-id=3D"e94299d4-8ae5-47ba-ab68-eb8376d4eeec">
+<p local-id=3D"6bb71263d646">The evaluated <strong>DMN result</strong>: <co=
+de>quoteValidity =3D "Valid"</code> or <code>"Invalid"</code>.</p></li>
+<li local-id=3D"a9739a50-d7bd-4cf0-9a58-31b9c542e158">
+<p local-id=3D"6f8edbf91e0e">The <strong>BPMN path</strong> taken, e.g.:<br=
+><code>Start =E2=86=92 Prepare Values for DMN =E2=86=92 Look-up Results =E2=
+=86=92 Result / Decision Gateway =E2=86=92 Set Status Valid =E2=86=92 End</=
+code><br>
+or<br><code>=E2=80=A6 =E2=86=92 Set Status Invalid =E2=86=92 End</code>.</p=
+></li>
+</ul></li>
+<li local-id=3D"c4446827-7a2a-47f1-b0ea-b971427d5248">
+<p local-id=3D"47b8294e1c79">This can be a <strong>simple text/path trace</=
+strong> or a very light visual representation (no complex modelling UI requ=
+ired for MVP).</p></li>
+</ul></li>
+<li local-id=3D"42d714b5-0137-411a-b05a-f9192285cddd">
+<p local-id=3D"040db3246370"><strong>Support basic scenario exploration</st=
+rong></p>
+<ul local-id=3D"c5c93638-b982-44b0-bc8c-b4e16a6bc052">
+<li local-id=3D"3712c4f7-641b-4b5f-aff2-37e5d7fca773">
+<p local-id=3D"82dc1fede979">Allow BAs/testers to quickly run multiple =E2=
+=80=9Cwhat=E2=80=91if=E2=80=9D inputs (e.g. change <code>dealMarginPercent<=
+/code>, toggle <code>manualPriceCost</code>) and see:</p>
+<ul local-id=3D"b8c6450a-5dae-4c32-ab82-f420a6e6c4e1">
+<li local-id=3D"617be803-2c70-494b-9168-1c2fdc015ed2">
+<p local-id=3D"fcdec2ab1ae9">Whether the process is <strong>Valid</strong> =
+or <strong>Invalid</strong>.</p></li>
+<li local-id=3D"553d897d-1b08-4cb8-98de-1c0c2c35a766">
+<p local-id=3D"91003520196e">Which branch of the gateway is taken.</p></li>
+</ul></li>
+<li local-id=3D"52e3be09-c535-4ce1-8bec-a9aa00a4da8d">
+<p local-id=3D"5ab23fa75732">Optionally pre=E2=80=91populate a few canned s=
+cenarios:</p>
+<ul local-id=3D"1143ec45-9761-4d0b-aaa1-aed9143bc9c9">
+<li local-id=3D"9f15bc9d-c390-4f36-b054-72b9014df649">
+<p local-id=3D"b9a17f653362"><code>manualPriceCost =3D true</code>, <code>d=
+ealMarginPercent =3D 30</code> =E2=86=92 Invalid.</p></li>
+<li local-id=3D"21921341-1bf5-4c80-a5e3-94087d3f0737">
+<p local-id=3D"369c46c19167"><code>manualPriceCost =3D false</code>, <code>=
+dealMarginPercent =3D 24</code> =E2=86=92 Invalid.</p></li>
+<li local-id=3D"41ca8f6a-9880-4c8e-af21-ee0bef22051f">
+<p local-id=3D"dc30c902ce60"><code>manualPriceCost =3D false</code>, <code>=
+dealMarginPercent =3D 25</code> =E2=86=92 Valid.</p></li>
+</ul></li>
+</ul></li>
+</ol>
+<p local-id=3D"3f832a05dbca"><strong>Key Outcome (Hackathon MVP):</strong><=
+br>
+A <strong>working design=E2=80=91time simulator for the Entry Level Camunda=
+ Exercise</strong>, proving that BAs and testers can <strong>mock and valid=
+ate process behaviour and DMN decisions early</strong>, without deploying t=
+o Telflow training or configuring real job workers.</p>
+<hr local-id=3D"e705b3ef-28a2-4386-ae9f-8846a89ff6e2">
+<h2 local-id=3D"afa13cc62ebe" id=3D"Design-TimeProcessSimulatorforEarlyVali=
+dationofCamundaWorkflows-Whatisthebusiness/userimpactofimplementingyouridea=
+?"><strong>What is the business / user impact of implementing your idea?</s=
+trong></h2>
+<h3 local-id=3D"0ea5c68ae91f" id=3D"Design-TimeProcessSimulatorforEarlyVali=
+dationofCamundaWorkflows-BusinessImpact"><strong>Business Impact</strong></=
+h3>
+<ul local-id=3D"a18fb4e6-db77-4048-9d2d-1956f9b1493d">
+<li local-id=3D"e8b79cc5-d2cf-4217-9e71-ee1ee6f44b7a">
+<p local-id=3D"f39dcee3ad97"><strong>Shift=E2=80=91left detection of workfl=
+ow/rule defects</strong></p>
+<ul local-id=3D"340a0a5b-11be-491b-aff2-7ac4ee90dbd6">
+<li local-id=3D"46b49ff7-5c7a-4233-aeb4-e605c080c000">
+<p local-id=3D"fa50cb2f9098">Catch misconfigured DMN logic, gateway conditi=
+ons, and variable mappings <strong>before deployment</strong>.</p></li>
+<li local-id=3D"0fd7ac0b-b853-4aef-85d3-5f60a96e958f">
+<p local-id=3D"8ec665e06939">Reduce late defects found only when the enquir=
+y is wired to the process in training/test.</p></li>
+</ul></li>
+<li local-id=3D"724e9472-dc96-4e79-a0da-232716e4611a">
+<p local-id=3D"c923a7f2e49b"><strong>Lower cost of changes and faster itera=
+tion</strong></p>
+<ul local-id=3D"912511cd-df3e-4ecb-85c3-8754d65c6c2c">
+<li local-id=3D"7e69a14d-cbe5-467f-8430-748a9bc84cc8">
+<p local-id=3D"a774ca0260a2">BAs can safely experiment with rule thresholds=
+ (e.g. margin cut=E2=80=91offs) and immediately see Valid/Invalid outcomes.=
+</p></li>
+<li local-id=3D"0c3e9c1a-b687-422a-bd1c-5aaadd79b93d">
+<p local-id=3D"46f207d294ef">Less rework on BPMN/DMN after deployment.</p><=
+/li>
+</ul></li>
+<li local-id=3D"79430b0a-1961-4a44-b549-4201e3c977b4">
+<p local-id=3D"b4cce2ab290c"><strong>Foundation for broader process testing=
+ accelerator</strong></p>
+<ul local-id=3D"b991305b-a13a-4272-818f-401757b27ae0">
+<li local-id=3D"02c9bfed-0094-4ad9-bc53-e6ef1340e282">
+<p local-id=3D"e6581c6aba96">The MVP acts as a <strong>pattern</strong> tha=
+t can later be extended to other BPMN/DMN models beyond the entry=E2=80=91l=
+evel exercise.</p></li>
+</ul></li>
+</ul>
+<h3 local-id=3D"23df5a568926" id=3D"Design-TimeProcessSimulatorforEarlyVali=
+dationofCamundaWorkflows-User/InternalTeamImpact"><strong>User / Internal T=
+eam Impact</strong></h3>
+<ul local-id=3D"8aa1ac3c-3f51-4e42-9f56-33b6fd4fff78">
+<li local-id=3D"809e2fa8-7a83-407c-a735-30db5d33ff95">
+<p local-id=3D"7d1240d79944"><strong>Business Analysts</strong></p>
+<ul local-id=3D"84871937-a6a2-4cbe-b842-091367d8e4f9">
+<li local-id=3D"531dd0fd-c498-4a05-9bce-9b5126bb965c">
+<p local-id=3D"a9fd9c0d1080">Can =E2=80=9Ctest drive=E2=80=9D their Entry=
+=E2=80=91Level process <strong>in Camunda design time</strong> using only t=
+he modeller and simulator.</p></li>
+<li local-id=3D"1c26a3f7-a9b9-4f0d-8c9f-818448330c22">
+<p local-id=3D"cfcc386cf5a4">Immediately see how different <code>manualPric=
+eCost</code> and <code>dealMarginPercent</code> combinations affect <strong=
+>quote validity and path routing</strong>.</p></li>
+</ul></li>
+<li local-id=3D"c78fb902-fafb-498e-a710-d5a559fe7516">
+<p local-id=3D"092441cc5b44"><strong>Test Engineers</strong></p>
+<ul local-id=3D"5b5e90e0-7fca-4923-83c5-26df461de9b4">
+<li local-id=3D"8dcdb44e-4899-45be-8c75-1a707b4a78e5">
+<p local-id=3D"cf591d238417">Move some validation <strong>earlier</strong>,=
+ instead of only at runtime via the full enquiry + delivery process flow.</=
+p></li>
+<li local-id=3D"33863f6b-1d54-4a4d-b10d-029337e84db9">
+<p local-id=3D"87035e96b796">Use design=E2=80=91time scenarios as a startin=
+g point for later <strong>runtime regression tests</strong> in Telflow.</p>=
+</li>
+</ul></li>
+<li local-id=3D"ca6c8973-2ff2-47cf-b7e4-244cb12d752a">
+<p local-id=3D"949365617d6f"><strong>Developers</strong></p>
+<ul local-id=3D"3bc2960c-c11e-418f-bb72-01a4b0c68890">
+<li local-id=3D"113d0293-2090-4436-8db8-acb76d74d220">
+<p local-id=3D"1abfb71ba967">Receive <strong>better=E2=80=91validated model=
+s</strong> from BAs, with fewer logic errors to fix post=E2=80=91deployment=
+.</p></li>
+<li local-id=3D"e2983afd-c961-4030-b7d8-10420acce3c1">
+<p local-id=3D"51c8fb996ebb">Gain a simple harness they can reuse when impl=
+ementing or refactoring job workers.</p></li>
+</ul></li>
+</ul>
+<hr local-id=3D"9fe10420-193c-4fbc-b2d5-d1f07034e3ab">
+<h2 local-id=3D"2350db82fa92" id=3D"Design-TimeProcessSimulatorforEarlyVali=
+dationofCamundaWorkflows-Whatotherskillsdoyouneedtomakeyourideaareality?"><=
+strong>What other skills do you need to make your idea a reality?</strong><=
+/h2>
+<p local-id=3D"7a60f6989b9d">Given the team you already have (Camunda=E2=80=
+=91expert BA, Telflow test engineer, backend dev), the <strong>MVP is feasi=
+ble in a week</strong>. The skills required fit your current mix:</p>
+<h3 local-id=3D"6f8f37b08d1c" id=3D"Design-TimeProcessSimulatorforEarlyVali=
+dationofCamundaWorkflows-Camunda&amp;ModellingSkills(BA/TechBA)"><strong>Ca=
+munda &amp; Modelling Skills (BA / Tech BA)</strong></h3>
+<ul local-id=3D"6b6e8650-0b4e-47ee-8b9e-1197f0918d53">
+<li local-id=3D"30155ab9-6516-488e-8215-725816eec9e4">
+<p local-id=3D"6b48f396bf95">Comfortable with <strong>Camunda Modeler</stro=
+ng>, BPMN, and DMN (already used in the Entry Level exercise page).</p></li=
+>
+<li local-id=3D"25678db6-6924-4c7b-afa9-94e1f33553c8">
+<p local-id=3D"27909b46c746">Able to validate that the simulator=E2=80=99s =
+behaviour matches:</p>
+<ul local-id=3D"d4c227a4-ae58-4e96-83bf-79b74d433c86">
+<li local-id=3D"f525adbf-61d6-41b4-90d1-43d14334c1ce">
+<p local-id=3D"024f105b1115">The DMN logic <code>entry_level_camunda_exerci=
+se_v1_0</code>.</p></li>
+<li local-id=3D"499770ad-4f29-4443-a7db-5437c780ba2d">
+<p local-id=3D"fa71dc259ed0">The gateway conditions and status=E2=80=91sett=
+ing behaviour described on the Confluence page.</p></li>
+</ul></li>
+</ul>
+<h3 local-id=3D"7d5cc2a684f8" id=3D"Design-TimeProcessSimulatorforEarlyVali=
+dationofCamundaWorkflows-TestEngineering(Runtime&amp;DesignTestinginTelflow=
+)"><strong>Test Engineering (Runtime &amp; Design Testing in Telflow)</stro=
+ng></h3>
+<ul local-id=3D"62ba1d32-7a4e-4830-9bdc-c459cfcba081">
+<li local-id=3D"2be80826-09ac-4989-ad8f-3c583f0a38b7">
+<p local-id=3D"89a85342876b">Define <strong>test scenarios</strong> and exp=
+ected outcomes based on the enquiry/DMN rules:</p>
+<ul local-id=3D"374105aa-d0c1-4b8f-bf95-4209c42c91f9">
+<li local-id=3D"6ce90f1e-253b-4418-918d-e763c71c9ccc">
+<p local-id=3D"12f3d8aed2ef">Edge cases for margin and manual pricing combi=
+nations.</p></li>
+</ul></li>
+<li local-id=3D"bb72135e-0526-4749-9548-ca9919130878">
+<p local-id=3D"cad6410823ee">Compare simulator results with actual behaviou=
+r in <strong>training</strong> (post=E2=80=91deployment) to show value.</p>=
+</li>
+</ul>
+<h3 local-id=3D"7a0aacf8e620" id=3D"Design-TimeProcessSimulatorforEarlyVali=
+dationofCamundaWorkflows-Backend/IntegrationDevelopment"><strong>Backend / =
+Integration Development</strong></h3>
+<ul local-id=3D"ccf65563-19f5-45c4-896e-37dde2c1ae92">
+<li local-id=3D"5f361a1f-ad75-4d07-bac0-1f3248ad9cdb">
+<p local-id=3D"961d5cbc0d7e">Implement a small <strong>simulation service</=
+strong> that:</p>
+<ul local-id=3D"75332df6-c00c-4077-9209-2b6026d1e649">
+<li local-id=3D"9693cb09-7ec9-4f54-a2fb-f41e98318d39">
+<p local-id=3D"6ca22ee8642d">Accepts input variables and scenario definitio=
+ns.</p></li>
+<li local-id=3D"bb860097-50d1-41d4-bf87-f2b394765f36">
+<p local-id=3D"d3a02d41e032">Mocks the <code>data-manipulation</code> worke=
+r behaviour (no real worker or Vault).</p></li>
+<li local-id=3D"f4442eb9-014b-4099-b9d0-99cc9909853f">
+<p local-id=3D"99dd522d8211">Invokes DMN evaluation for <code>entry_level_c=
+amunda_exercise_v1_0</code>.</p></li>
+<li local-id=3D"e06bc450-bba6-48fe-a41f-34eb9f3db2da">
+<p local-id=3D"abf547c0fbc5">Determines and returns the executed path (Vali=
+d vs Invalid branch).</p></li>
+</ul></li>
+<li local-id=3D"d05b3545-ba60-4bb3-8326-fa325232f8d3">
+<p local-id=3D"311f611e742a">Provide a <strong>minimal UI or API</strong> t=
+hat BAs and testers can use during the hackathon demo.</p></li>
+</ul>
+<hr local-id=3D"16768e46-8bca-4cb6-9e1d-4b6d2fabbcac">
+<h2 local-id=3D"567b5b957e64" id=3D"Design-TimeProcessSimulatorforEarlyVali=
+dationofCamundaWorkflows-Whichofthehackathonthemesdoesyourchallengebestappl=
+yto?"><strong>Which of the hackathon themes does your challenge best apply =
+to?</strong></h2>
+<p local-id=3D"ab1278410883"><strong>Theme:</strong> <strong>Solution Accel=
+erator</strong></p>
+<p local-id=3D"5cdc5a88201b">This MVP is a <strong>Solution Accelerator</st=
+rong> because it:</p>
+<ul local-id=3D"af672f15-e1dc-46c3-aa09-1b5c499d8cd6">
+<li local-id=3D"88df4d05-6f0e-443f-b7d6-fc584b5708df">
+<p local-id=3D"354e26115f6c">Turns the existing <strong>Entry Level =E2=80=
+=93 Camunda Exercise</strong> guide into a <strong>working design=E2=80=91t=
+ime testing tool</strong>.</p></li>
+<li local-id=3D"fc420b53-bf81-4000-aeb9-74fe1ad7e45c">
+<p local-id=3D"03d867f9e43c">Demonstrates a <strong>reusable pattern</stron=
+g> for simulating Camunda processes and DMN decisions <strong>before</stron=
+g> integration with Telflow.</p></li>
+<li local-id=3D"10d89386-a219-4474-98bd-adc7d87a19e1">
+<p local-id=3D"a5c512e6e0cc">Directly tackles the pain point of <strong>lat=
+e, runtime=E2=80=91only path testing</strong> by enabling <strong>early, BA=
+=E2=80=91driven validation</strong> of Camunda workflows.</p></li>
+</ul>
+<h2 local-id=3D"4afe282f2ea4" id=3D"Design-TimeProcessSimulatorforEarlyVali=
+dationofCamundaWorkflows-Reference">Reference</h2>
+<p local-id=3D"e074c15c14aa"><a data-card-appearance=3D"inline" href=3D"htt=
+ps://csg-quote-order.atlassian.net/wiki/x/AYBUzQ" local-id=3D"050c1741aecc"=
+ rel=3D"nofollow">https://csg-quote-order.atlassian.net/wiki/x/AYBUzQ</a></=
+p>
+    </div>
+</body>
+</html>
+------=_Part_12_450201438.1770689224713--

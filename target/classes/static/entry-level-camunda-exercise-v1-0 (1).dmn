@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Entry-Level-Camunda-Exercise-DMN-v1-0" name="Entry Level Camunda Exercise DMN v1.0" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.38.1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <decision id="entry_level_camunda_exercise_v1_0" name="QUOTE Price Cost and Margin Validation">
+    <question></question>
+    <informationRequirement id="InformationRequirement_0luki5x">
+      <requiredInput href="#InputData_0k3rzz3" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1scv2gl">
+      <requiredInput href="#InputData_1ooxtgf" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0rwz70b" hitPolicy="FIRST">
+      <input id="Input_1" label="Manual Price Cost">
+        <inputExpression id="InputExpression_1" typeRef="boolean">
+          <text>manualPriceCost</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_08ma4ad" label="Deal Margin Percent">
+        <inputExpression id="LiteralExpression_1friq1s" typeRef="number">
+          <text>floor(dealMarginPercent)</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Validity" name="quoteValidity" typeRef="string" />
+      <rule id="DecisionRule_0pi9w35">
+        <inputEntry id="UnaryTests_1077gg6">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17r27wv">
+          <text>&gt;=25</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_19jha8i">
+          <text>"Valid"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ltoba1">
+        <inputEntry id="UnaryTests_13hy38w">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09mmq0r">
+          <text>&lt;25</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0g1fkce">
+          <text>"Invalid"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ueqfuw">
+        <inputEntry id="UnaryTests_14vnnqq">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03tse0a">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0k7tg0q">
+          <text>"Invalid"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_0k3rzz3" name="Manual Price Cost" />
+  <inputData id="InputData_1ooxtgf" name="Deal Margin Percent" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="entry_level_camunda_exercise_v1_0">
+        <dc:Bounds height="80" width="180" x="310" y="90" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0je7fju" dmnElementRef="InputData_0k3rzz3">
+        <dc:Bounds height="45" width="125" x="118" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1vog2lt" dmnElementRef="InputData_1ooxtgf">
+        <dc:Bounds height="45" width="125" x="119" y="139" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_16beg93" dmnElementRef="InformationRequirement_0luki5x">
+        <di:waypoint x="243" y="103" />
+        <di:waypoint x="290" y="117" />
+        <di:waypoint x="310" y="117" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1q0gyj3" dmnElementRef="InformationRequirement_1scv2gl">
+        <di:waypoint x="244" y="162" />
+        <di:waypoint x="290" y="143" />
+        <di:waypoint x="310" y="143" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

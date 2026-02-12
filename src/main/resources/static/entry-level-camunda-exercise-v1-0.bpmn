@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1f5sl7o" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.38.1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.7.0">
+  <bpmn:process id="Entry-Level-Camunda-Exercise-v1-0" name="Entry Level Camunda Exercise v1.0" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Start">
+      <bpmn:outgoing>Flow_0hmzefi</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_0fl76l0" name="Test Result" default="Flow_0v7c35j">
+      <bpmn:incoming>Flow_03hvxca</bpmn:incoming>
+      <bpmn:outgoing>Flow_0v7c35j</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0j081os</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="Event_1eg8n6b" name="Terminate">
+      <bpmn:incoming>Flow_1jg4r9k</bpmn:incoming>
+      <bpmn:incoming>Flow_059k092</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="TerminateEventDefinition_1ry1g8x" />
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_0kr0uu8" name="Prepare Values for DMN (1000)">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="data-manipulation" retries="5" />
+        <zeebe:taskHeaders>
+          <zeebe:header key="manipulation-1" value="{&#34;target&#34;: &#34;dealMarginPercent&#34;, &#34;expression&#34;: &#34;bi_dealMarginPercent&#34;}" />
+          <zeebe:header key="manipulation-2" value="{&#34;target&#34;: &#34;manualPriceCost&#34;, &#34;expression&#34;: &#34;bi_manualPriceCost&#34;}" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0hmzefi</bpmn:incoming>
+      <bpmn:outgoing>Flow_1i8eeis</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1jg4r9k" sourceRef="Activity_0mznp46" targetRef="Event_1eg8n6b" />
+    <bpmn:sequenceFlow id="Flow_059k092" sourceRef="Activity_1f7z0de" targetRef="Event_1eg8n6b" />
+    <bpmn:sequenceFlow id="Flow_0v7c35j" name="Valid" sourceRef="Gateway_0fl76l0" targetRef="Activity_1f7z0de" />
+    <bpmn:sequenceFlow id="Flow_0j081os" name="Invalid" sourceRef="Gateway_0fl76l0" targetRef="Activity_0mznp46">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=quoteValidity = "Invalid"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_03hvxca" sourceRef="Activity_0qs1njc" targetRef="Gateway_0fl76l0" />
+    <bpmn:sequenceFlow id="Flow_1i8eeis" sourceRef="Activity_0kr0uu8" targetRef="Activity_0qs1njc" />
+    <bpmn:sequenceFlow id="Flow_0hmzefi" sourceRef="StartEvent_1" targetRef="Activity_0kr0uu8" />
+    <bpmn:businessRuleTask id="Activity_0qs1njc" name="Look-up Result (2000)">
+      <bpmn:extensionElements>
+        <zeebe:calledDecision decisionId="entry_level_camunda_exercise_v1_0" resultVariable="quoteValidity" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1i8eeis</bpmn:incoming>
+      <bpmn:outgoing>Flow_03hvxca</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:serviceTask id="Activity_1f7z0de" name="Set Status (3000)">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="data-manipulation" retries="5" />
+        <zeebe:taskHeaders>
+          <zeebe:header key="manipulation-1" value="{&#34;target&#34;: &#34;cim_Status&#34;, &#34;expression&#34;: &#34;\&#34;Valid\&#34;&#34;}" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0v7c35j</bpmn:incoming>
+      <bpmn:outgoing>Flow_059k092</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0mznp46" name="Set Status (4000)">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="data-manipulation" retries="5" />
+        <zeebe:taskHeaders>
+          <zeebe:header key="manipulation-1" value="{&#34;target&#34;: &#34;cim_Status&#34;, &#34;expression&#34;: &#34;\&#34;Invalid\&#34;&#34;}" />
+        </zeebe:taskHeaders>
+        <zeebe:properties>
+          <zeebe:property name="configureToOrder" value="Enquiry" />
+        </zeebe:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0j081os</bpmn:incoming>
+      <bpmn:outgoing>Flow_1jg4r9k</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:textAnnotation id="TextAnnotation_01tl11e">
+      <bpmn:text>Valid</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_198kojw" associationDirection="None" sourceRef="Activity_1f7z0de" targetRef="TextAnnotation_01tl11e" />
+    <bpmn:textAnnotation id="TextAnnotation_0a2tgel">
+      <bpmn:text>Invalid</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_19dthga" associationDirection="None" sourceRef="Activity_0mznp46" targetRef="TextAnnotation_0a2tgel" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Entry-Level-Camunda-Exercise-v1-0">
+      <bpmndi:BPMNShape id="Gateway_0fl76l0_di" bpmnElement="Gateway_0fl76l0" isMarkerVisible="true">
+        <dc:Bounds x="735" y="165" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="733" y="135" width="55" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_06g8l7u_di" bpmnElement="Event_1eg8n6b">
+        <dc:Bounds x="1182" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1176" y="142" width="49" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_14hy7aq_di" bpmnElement="Activity_0kr0uu8">
+        <dc:Bounds x="310" y="150" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="182" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="188" y="215" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0bhsiyi_di" bpmnElement="Activity_0qs1njc">
+        <dc:Bounds x="520" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1cf9b3a_di" bpmnElement="Activity_1f7z0de">
+        <dc:Bounds x="920" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1d1v73y_di" bpmnElement="Activity_0mznp46">
+        <dc:Bounds x="920" y="350" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_198kojw_di" bpmnElement="Association_198kojw">
+        <di:waypoint x="1008" y="150" />
+        <di:waypoint x="1056" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_19dthga_di" bpmnElement="Association_19dthga">
+        <di:waypoint x="1008" y="350" />
+        <di:waypoint x="1056" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_01tl11e_di" bpmnElement="TextAnnotation_01tl11e">
+        <dc:Bounds x="1020" y="70" width="100" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0a2tgel_di" bpmnElement="TextAnnotation_0a2tgel">
+        <dc:Bounds x="1020" y="270" width="100" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1jg4r9k_di" bpmnElement="Flow_1jg4r9k">
+        <di:waypoint x="1020" y="390" />
+        <di:waypoint x="1200" y="390" />
+        <di:waypoint x="1200" y="208" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_059k092_di" bpmnElement="Flow_059k092">
+        <di:waypoint x="1020" y="190" />
+        <di:waypoint x="1182" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0v7c35j_di" bpmnElement="Flow_0v7c35j">
+        <di:waypoint x="785" y="190" />
+        <di:waypoint x="920" y="190" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="841" y="172" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j081os_di" bpmnElement="Flow_0j081os">
+        <di:waypoint x="760" y="215" />
+        <di:waypoint x="760" y="390" />
+        <di:waypoint x="920" y="390" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="837" y="373" width="32" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03hvxca_di" bpmnElement="Flow_03hvxca">
+        <di:waypoint x="620" y="190" />
+        <di:waypoint x="735" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1i8eeis_di" bpmnElement="Flow_1i8eeis">
+        <di:waypoint x="410" y="190" />
+        <di:waypoint x="520" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hmzefi_di" bpmnElement="Flow_0hmzefi">
+        <di:waypoint x="218" y="190" />
+        <di:waypoint x="310" y="190" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
